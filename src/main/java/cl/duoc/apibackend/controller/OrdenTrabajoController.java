@@ -6,12 +6,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping({"/api/ordenes", "/v1/ordenes"})
+// Agregamos "/api/orders" para que coincida con la llamada del frontend
+@RequestMapping({"/api/ordenes", "/v1/ordenes", "/api/orders"})
 public class OrdenTrabajoController {
 
     @GetMapping
-    @PreAuthorize("hasAuthority('SCOPE_OT.Create')")
+    // Ajustamos el scope para que coincida con el token que envía Angular
+    @PreAuthorize("hasAuthority('SCOPE_access_as_user2')")
     public String obtenerOrdenes() {
-        return "API protegida - acceso autorizado con OT.Create";
+        return "API protegida - acceso autorizado con access_as_user2";
     }
 }
